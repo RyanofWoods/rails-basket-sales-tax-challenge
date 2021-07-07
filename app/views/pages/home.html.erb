@@ -1,0 +1,17 @@
+<h1>Upload a product list</h1>
+
+<%= form_with url: "/uploads", multipart: true do |f| %>
+  <%= f.file_field :uploaded_file_list, accept: 'text/plain' %>  
+  <%= f.submit "Submit" %>
+<% end %>
+
+<% if @basket %>
+
+  <ul style="list-style: none">
+  <% @basket.items.each do |item| %>
+    <li>- <%= "#{item.quantity} #{item.name}: #{'%.2f' % item.shelf_price}"%></li>
+  <% end %>
+    <li>- Sales Taxes: <%= '%.2f' % @basket.total_sales_tax %></li>
+    <li>- Total: <%= '%.2f' % @basket.total %></li>
+  </ul>
+<% end %>
